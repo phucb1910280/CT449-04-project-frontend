@@ -7,7 +7,19 @@
       <h1>{{ product.name }}</h1>
       <h3 id="price">{{ product.price }}</h3>
       <p>Average rating: {{ product.averageRating }}</p>
-      <button id="add-to-cart">Add to Cart</button>
+
+      <button 
+        id="add-to-cart"
+        v-if="!showSuccessMessage"
+        v-on:click="addToCart"
+        >Add to Cart</button>
+
+        <button 
+        class="green-button"
+        id="add-to-cart"
+        v-if="showSuccessMessage"
+        >Successfuly added item to Cart</button>
+
       <h4>Description</h4>
       <p>{{ product.description }}</p>
     </div>
@@ -23,9 +35,21 @@ import NotFoundPage from './NotFoundPage.vue';
     data() {
         return {
           product: {},
+          showSuccessMessage: false,
         };
     },
     components: { NotFoundPage },
+    methods: {
+      async addToCart() {
+        await axios.post('/api/users/12345/cart', {
+          productId: this.$route.params.id,
+        });
+        this.showSuccessMessage = true;
+        setTimeout(() => {
+          this.$router.push('/products');
+        }, 1500);
+      }
+    }, 
     async created() {
       const result = await axios.get(`/api/products/${this.$route.params.id}`);
       const product = result.data;
@@ -62,5 +86,9 @@ import NotFoundPage from './NotFoundPage.vue';
     position: absolute;
     top: 24px;
     right: 16px;
+  }
+
+  .green-button {
+    background-color: green;
   }
 </style>
