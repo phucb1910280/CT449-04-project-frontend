@@ -10,15 +10,21 @@
 
       <button 
         id="add-to-cart"
-        v-if="!showSuccessMessage"
+        v-if="!itemIsInCart && !showSuccessMessage"
         v-on:click="addToCart"
         >Add to Cart</button>
 
         <button 
         class="green-button"
         id="add-to-cart"
-        v-if="showSuccessMessage"
+        v-if="!itemIsInCart && showSuccessMessage"
         >Successfuly added item to Cart</button>
+
+        <button 
+        class="grey-button"
+        id="add-to-cart"
+        v-if="itemIsInCart"
+        >Item is already in Cart</button>
 
       <h4>Description</h4>
       <p>{{ product.description }}</p>
@@ -35,8 +41,14 @@ import NotFoundPage from './NotFoundPage.vue';
     data() {
         return {
           product: {},
+          cartItems: [],
           showSuccessMessage: false,
         };
+    },
+    computed: {
+      itemIsInCart() {
+        return this.cartItems.some(item => item.id === this.product.id);
+      }
     },
     components: { NotFoundPage },
     methods: {
@@ -51,9 +63,10 @@ import NotFoundPage from './NotFoundPage.vue';
       }
     }, 
     async created() {
-      const result = await axios.get(`/api/products/${this.$route.params.id}`);
-      const product = result.data;
+      const {data: product} = await axios.get(`/api/products/${this.$route.params.id}`);
       this.product = product;
+      const { data: cartItems } = await axios.get('/api/users/12345/cart');
+      this.cartItems = cartItems;
     }
 };
 </script>
@@ -90,5 +103,9 @@ import NotFoundPage from './NotFoundPage.vue';
 
   .green-button {
     background-color: green;
+  }
+
+  .grey-button {
+    background-color: grey;
   }
 </style>
