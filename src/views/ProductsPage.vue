@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import { products } from '../fake-data';
+  import axios from 'axios';
   import ProductsGrid from '../components/ProductsGrid';
     export default {
         name: 'ProductsPage',
@@ -14,8 +14,13 @@
         },
         data() {
           return {
-            products,
+            products: [],
           };
+        },
+        async created() {
+          const result = await axios.get('/api/products');
+          const products = result.data;
+          this.products = products;
         }
     };
 </script>
