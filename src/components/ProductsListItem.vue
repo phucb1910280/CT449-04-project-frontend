@@ -5,12 +5,12 @@
       <img :src="product.imageUrl" class="product-image" alt="">
       <div class="details-wrap">
         <h3>{{ product.name }}</h3>
-        <p>${{ product.price }}</p>
+        <p>{{ product.price }}đ</p>
       </div>
       <button 
         class="remove-button"
         v-on:click="$emit('remove-from-cart', product.id)"
-      >Remove from Cart</button>
+      >Xoá khỏi giỏ hàng</button>
     </div>
 </template>
 

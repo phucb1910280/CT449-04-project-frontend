@@ -1,11 +1,11 @@
 <template>
   <div id="page-wrap">
-    <h1>Shopping Cart</h1>
+    <h1>Giỏ hàng</h1>
     <ProductsList 
       :products="cartItems"
       v-on:remove-from-cart="removeFromCart($event)"/>
-    <h3 id="total-price">${{ totalPrice }}</h3>
-    <button id="checkout-button">Procced to Checkout</button>
+    <h3 id="total-price">{{ totalPrice }}đ</h3>
+    <button id="checkout-button">Thanh toán</button>
   </div>
 </template>
 

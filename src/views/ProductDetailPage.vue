@@ -12,19 +12,19 @@
         id="add-to-cart"
         v-if="!itemIsInCart && !showSuccessMessage"
         v-on:click="addToCart"
-        >Add to Cart</button>
+        >Thêm vào giỏ hàng</button>
 
         <button 
         class="green-button"
         id="add-to-cart"
         v-if="!itemIsInCart && showSuccessMessage"
-        >Successfuly added item to Cart</button>
+        >Thêm vào giở hàng thành công</button>
 
         <button 
         class="grey-button"
         id="add-to-cart"
         v-if="itemIsInCart"
-        >Item is already in Cart</button>
+        >Sản phẩm đã tồn tại trong giỏ hàng</button>
 
       <h4>Description</h4>
       <p>{{ product.description }}</p>

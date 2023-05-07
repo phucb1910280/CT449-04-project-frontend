@@ -4,9 +4,9 @@
       >
         <img v-bind:src="product.imageUrl" alt="">
         <h3 class="product-name">{{ product.name }}</h3>
-        <p class="product-price">${{ product.price }}</p>
+        <p class="product-price">{{ product.price }}đ</p>
         <router-link v-bind:to="'/products/'+ product.id">
-          <button>View Details</button>
+          <button>Chi tiết</button>
         </router-link>
       </div>
 </template>

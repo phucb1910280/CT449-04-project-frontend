@@ -1,10 +1,10 @@
 <template>
     <div id="nav-bar">
         <router-link to="/products" id="products-link">
-            <h1>FABULOUS FOOTWEAR</h1>
+            <h1>iris</h1>
         </router-link>
         <router-link to="/cart" id="cart-link">
-            <button>Shopping Cart</button>
+            <button>Giỏ hàng</button>
         </router-link>
     </div>
 </template>
